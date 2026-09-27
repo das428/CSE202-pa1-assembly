@@ -5,6 +5,17 @@
 #   offset 8  : value
 #   offset 16 : next
 sum:
+    movq $0, %rax          # total = 0
+
+.Loop:
+    testq %rdi, %rdi       # 
+    je .L                  # if so, end of list
+    addq 8(%rdi), %rax     # total += ptr->value
+    movq 16(%rdi), %rdi    # ptr = ptr->next
+    jmp .Loop
+
+.L:
+    retq
     retq
 
 
